@@ -232,3 +232,32 @@ create table neuedu_shipping(
 PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 ```
+### 项目架构---四层架构
+
+```
+视图层
+控制层controller(接收视图层传递的数据，负责去调用业务逻辑层，处理业务逻辑，值通过控制层返回给视图层)
+业务逻辑层service(处理业务逻辑，负责具体的业务逻辑，业务逻辑层去调用dao层)
+    接口和实现类
+dao层(主要是和数据库做交互，负责对数据库的操作，对数据的增删改查)
+
+```
+
+### mybatis-generator插件
+```
+可以一键生成dao接口、实体类和映射文件
+```
+
+### 搭建ssm框架
+#### 依赖的jar包
+```
+junit单元测试
+mysql驱动包
+```
+
+### 知识点
+```
+mybatis：半自动化框架
+jdbc.username:加上jdbc前缀为防止默认加载系统的username
+@RestController:往前端返回的数据是json格式的
+```
