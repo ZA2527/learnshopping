@@ -64,3 +64,9 @@
 ##### /TODO  仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO
 ##### build/  忽略 build/ 目录下的所有文件
 ##### doc/*.txt  忽略 doc/notes.txt 但不包括 doc/server/arch.txt
+------------20181204------------
+###远程分支合并dev分支
+#### git checkout dev
+#### git push origin dev
+#### git checkout master
+#### git merge dev
