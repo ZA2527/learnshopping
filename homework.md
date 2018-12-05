@@ -264,6 +264,13 @@ spring-web和spring-webmvc：spring web项目的依赖
 spring-tx：事务管理的依赖
 spring-jdbc：jdbc的依赖
 jstl：jstl依赖的jar包
+日志框架Logback的依赖
+json解析的依赖
+guava缓存的依赖包
+mybatis-pagehelper 分页插件
+joda-time 时间格式化
+commons-fileupload和commons-io：图片上传
+alipay 集成支付宝需要的依赖包
 ```
 
 ### 知识点
