@@ -275,7 +275,18 @@ alipay 集成支付宝需要的依赖包
 
 ### 知识点
 ```
+索引加在数值类型上：bigint对应java中的long类型(加索引时字段的类型只能是数值类型)
 mybatis：半自动化框架
 jdbc.username:加上jdbc前缀为防止默认加载系统的username
 @RestController:往前端返回的数据是json格式的
+
+@RequestParam(value = "username"，required = true) String username
+value中的值与传入进来的参数保持一致（页面上直接输入的key值），当value值与形参值相同时,注解可以省略
+required = true：代表参数必须要传递，可传可不传时设置成false
+defaultValue = "zhangsan"：当username不传时默认为zhangsan
+springmvc的对象绑定
+在java中不确定类型用泛型表示
+commons-lang jar包提供了常用的效验方法(如：StringUtils.isBlank()和StringUtils.isEmpty())
+使用StringUtils.isBlank()方法认为"  "为空(引号中有空格认为为空)``````
+使用StringUtils.isEmpty()方法(字符串为空或者长度为零)
 ```
