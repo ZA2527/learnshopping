@@ -289,4 +289,75 @@ springmvc的对象绑定
 commons-lang jar包提供了常用的效验方法(如：StringUtils.isBlank()和StringUtils.isEmpty())
 使用StringUtils.isBlank()方法认为"  "为空(引号中有空格认为为空)``````
 使用StringUtils.isEmpty()方法(字符串为空或者长度为零)
+数据库中当前时间用now()表示
+```
+
+#### 项目大体结构
+```
+
+对数据库中的密码通过MD5加密
+    public static String getMD5Code(String strObj) {
+    String resultString = null;
+    try {
+      resultString = new String(strObj);
+      MessageDigest md = MessageDigest.getInstance("MD5");
+      // md.digest() 该函数返回值为存放哈希值结果的byte数组
+      resultString = byteToString(md.digest(strObj.getBytes()));
+    } catch (NoSuchAlgorithmException ex) {
+      ex.printStackTrace();
+    }
+    return resultString;
+  }
+调用getMD5Code方法对密码加密
+MD5加密特点：不可逆的加密算法(通过MD5加密变成密文之后，不能通过密文获取到原密码)
+注册密码变成密文的之后，登录密码也应进行加密，否则登录时输入明文密码会显示密码输入错误
+
+
+定义响应状态码(枚举类型enum)：
+    PARAM_EMPTY(2,"参数为空"),
+    EXISTS_USERNAME(3,"用户名已经存在"),
+    EXISTS_EMAIL(4,"邮箱已经存在"),
+    NOT_EXISTS_USERNAME(5,"用户名不存在"),
+    USER_NOT_LOGIN(6,"用户未登录"),
+参数：status(状态)、msg(消息)
+提供有参和无参的构造函数以及set和get方法
+
+
+注册接口：
+注册接口中的参数：String username、String password、String email、String phone、String question、String answer
+多参数用数据绑定接收(对象形式)
+Impl实现类实现Service中的注册方法，实现类处理注册的业务逻辑，控制层调用业务逻辑层把数据返回给视图层
+步骤一：参数非空的校验
+步骤二：判断用户名是否存在
+步骤三：判断邮箱是否存在
+在dao层中书写校验邮箱的方法(与数据库做交互)，映射类中写sql语句，实现类处理具体的业务逻辑
+步骤四：注册
+步骤五：返回结果
+
+
+用户只有登录之后才能对购物车进行操作，购物车接口如何判断用户已经登录？
+把用户登录的信息保存到session中
+往session中保存数据：session.setAttribute(Const.CURRENTUSER,serverResponse.getData())
+Const.CURRENTUSER 代表用户表中的字段名
+serverResponse.getData() 代表字段中所对应的值
+通过HttpSession获取session当中的用户信息
+
+
+检查用户名或邮箱是否有效的接口
+参数：String str、String type，str对应用户名或邮箱的值，type对应的是username或email
+什么时候使用？注册接口在输入用户名或邮箱之后会反馈用户名或邮箱是否已存在，输入完成之后通过ajax异步加载调用接口返回数据，防止恶意调用接口
+在service中定义检查用户名和密码的方法，在实现类中处理业务逻辑
+步骤一：参数的非空校验
+通过调用StringUtils.isBlank()判断
+步骤二：判断用户名或邮箱是否存在
+步骤三：返回结果
+
+
+重构登录和注册接口
+登录的步骤二检查用户名是否存在调用检查用户名或邮箱是否有效接口中的check_valid()
+
+
+获取当前登录的用户的信息
+登录之后用户信息保存到了session当中，直接操作session获取信息
+如何判断对象的类型是否是某一类型：使用instanceof
 ```

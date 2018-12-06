@@ -17,4 +17,9 @@ public interface IUserService{
      */
     public ServerResponse login(String username,String password);
 
-}
+    /**
+     * 检测用户名或邮箱是否有效
+     * */
+    public ServerResponse check_valid(String str,String type);
+
+    }
