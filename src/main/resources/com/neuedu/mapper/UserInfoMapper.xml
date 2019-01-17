@@ -89,4 +89,20 @@
     from neuedu_user where username=#{username} and password=#{password}
   </select>
 
+  <select id="selectQuestionByUsername" parameterType="string" resultType="string">
+    select question from neuedu_user where username=#{username}
+  </select>
+
+  <select id="checkAnswerByUsernameAndQuestion" parameterType="map" resultType="int">
+    select count(1) from neuedu_user where username=#{username} and question=#{question} and answer=#{answer}
+  </select>
+
+  <update id="updatePasswordByUsername" parameterType="map">
+    update neuedu_user
+    set
+    password = #{password,jdbcType=VARCHAR},
+    update_time = now()
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+
 </mapper>
